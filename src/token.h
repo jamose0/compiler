@@ -2,6 +2,7 @@
 #define TOKEN_H
 
 #include <string>
+#include <iostream>
 #include <string_view>
 
 enum class TokenType {
@@ -27,6 +28,10 @@ public:
     TokenType getType();
 
     std::string_view getLexeme();
+
+    virtual ~Token() {}
+
+    friend std::ostream& operator<<(std::ostream& out, const Token &t);
 };
 
 #endif
