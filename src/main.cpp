@@ -1,7 +1,9 @@
+#include "scanner.h"
+
 #include <iostream>
 
 int main()
 {
-    std::cout << "hello, world!\n";
+    Scanner s{"scanner string"};
     return 0;
 }
