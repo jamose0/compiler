@@ -1,4 +1,5 @@
 #include "scanner.h"
+#include "token.h"
 
 Scanner::Scanner(std::string_view src)
     : m_src{src}
@@ -14,4 +15,9 @@ char Scanner::nextChar()
 char Scanner::peekChar()
 {
     return *ip;
+}
+
+Token Scanner::nextToken()
+{
+    return Token{TokenType::IDENTIFIER, "x"};
 }

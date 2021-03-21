@@ -20,7 +20,7 @@ private:
     const std::string m_lexeme;
 
 public:
-    Token(TokenType& type, std::string_view lexeme)
+    Token(TokenType type, std::string_view lexeme)
         : m_type{type}, m_lexeme{lexeme}
     {}
 
