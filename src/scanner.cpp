@@ -5,3 +5,8 @@ Scanner::Scanner(std::string_view src)
 {
     ip = const_cast<char*>(m_src.data());
 }
+
+char Scanner::nextChar()
+{
+    return *(ip++);
+}

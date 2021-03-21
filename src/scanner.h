@@ -13,12 +13,10 @@ private:
 
 public:
     Scanner(std::string_view src);
-    //    : m_src{src}
-    //{
-    //   ip = const_cast<char*>(m_src.data());
-    //}
 
     virtual ~Scanner() {}
+
+    char nextChar();
 };
 
 #endif
