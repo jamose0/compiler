@@ -12,6 +12,7 @@ private:
     char* ip;
 
     char nextChar();
+    char peekChar();
 
 public:
     Scanner(std::string_view src);

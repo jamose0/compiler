@@ -10,3 +10,8 @@ char Scanner::nextChar()
 {
     return *(ip++);
 }
+
+char Scanner::peekChar()
+{
+    return *ip;
+}
