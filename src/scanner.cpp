@@ -44,6 +44,15 @@ bool Scanner::checkKW(std::string_view kw)
     return false;
 }
 
+Token Scanner::getIdent(char* sp)
+{
+    while (isEligibleForIdent())
+        nextChar();
+
+    return Token{TokenType::IDENTIFIER,
+        std::string{sp, static_cast<size_t>(m_ip - sp)}};
+}
+
 Token Scanner::nextToken()
 {
     char character{};
@@ -158,12 +167,14 @@ Token Scanner::nextToken()
 
     if (isalpha(character) || character == '_') {
         std::cout << "Beginning of ident\n";
-        while (isEligibleForIdent()) {
-            character = nextChar();
-        }
 
-        return Token{TokenType::IDENTIFIER,
-            std::string{sp, static_cast<size_t>(m_ip - sp)}};
+        return getIdent(sp);
+        //while (isEligibleForIdent()) {
+        //character = nextChar();
+        //}
+
+        //return Token{TokenType::IDENTIFIER,
+        //std::string{sp, static_cast<size_t>(m_ip - sp)}};
     }
 
     return Token{TokenType::ERROR, std::string{"err"}};

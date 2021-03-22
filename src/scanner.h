@@ -35,6 +35,8 @@ private:
 
     bool checkKW(std::string_view cmp);
 
+    Token getIdent(char* sp);
+
 public:
     Scanner(std::string_view src);
 

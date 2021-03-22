@@ -5,7 +5,7 @@
 
 int main()
 {
-    Scanner s{"\n  \t\n 9functst{}ring"};
+    Scanner s{"\n  \t\n funct st{}ring"};
     std::cout << s.nextToken() << '\n';
     return 0;
 }
