@@ -16,6 +16,8 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
 {
     out << "Type: ";
     switch (t.m_type) {
+
+        /* Keywords */
     case TokenType::IF: {
         out << "IF";
         break;
@@ -76,6 +78,7 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "STRING";
         break;
     }
+        /* Not keywords */
     case TokenType::IDENTIFIER: {
         out << "IDENTIFIER";
         break;
@@ -86,6 +89,59 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
     }
     case TokenType::FLOATING: {
         out << "FLOATING";
+        break;
+    }
+        /* Punctuation */
+    case TokenType::R_BRACE: {
+        out << "R_BRACE";
+        break;
+    }
+    case TokenType::L_BRACE: {
+        out << "L_BRACE";
+        break;
+    }
+    case TokenType::R_SQUARE: {
+        out << "R_SQUARE";
+        break;
+    }
+    case TokenType::L_SQUARE: {
+        out << "L_SQUARE";
+        break;
+    }
+    case TokenType::R_PAREN: {
+        out << "R_PAREN";
+        break;
+    }
+    case TokenType::L_PAREN: {
+        out << "L_PAREN";
+        break;
+    }
+    case TokenType::SEMICOLON: {
+        out << "SEMICOLON";
+        break;
+    }
+    case TokenType::COMMA: {
+        out << "COMMA";
+        break;
+    }
+    case TokenType::STAR: {
+        out << "STAR";
+        break;
+    }
+    case TokenType::SLASH: {
+        out << "SLASH";
+        break;
+    }
+    case TokenType::PLUS: {
+        out << "PLUS";
+        break;
+    }
+    case TokenType::MINUS: {
+        out << "MINUS";
+        break;
+    }
+    case TokenType::ERROR: {
+        out << "ERROR";
         break;
     }
     default: {
