@@ -19,7 +19,7 @@ private:
     // Consume and return the next character of the source string
     char nextChar();
 
-    // Return but do not return the next character of the source string
+    // Return but do not consume the next character of the source string
     char peekChar();
 
     bool matchStr(char* p1, std::string_view p2, int len);
