@@ -53,6 +53,35 @@ Token Scanner::getIdent(char* sp)
         std::string{sp, static_cast<size_t>(m_ip - sp)}};
 }
 
+Token Scanner::getNumber(char* sp)
+{
+    while (isdigit(*m_ip)) {
+        nextChar();
+    }
+
+    if (*m_ip == '.') {
+
+        nextChar();
+
+        while (isdigit(*m_ip)) {
+            nextChar();
+        }
+
+        /* Since the last loop ended, we know that the current char is
+         not a digit; thus we can use isEligibleForIdent */
+
+        if (isEligibleForIdent()) {
+            return Token{TokenType::ERROR, std::string{"err"}};
+        }
+
+        return Token{TokenType::FLOATING,
+            std::string{sp, static_cast<size_t>(m_ip - sp)}};
+    }
+
+    return Token{TokenType::INTEGER,
+        std::string{sp, static_cast<size_t>(m_ip - sp)}};
+}
+
 Token Scanner::nextToken()
 {
     char character{};
@@ -169,6 +198,12 @@ Token Scanner::nextToken()
         std::cout << "Beginning of ident\n";
 
         return getIdent(sp);
+    }
+
+    if (isdigit(character)) {
+        std::cout << "expecting number\n";
+
+        return getNumber(sp);
     }
 
     return Token{TokenType::ERROR, std::string{"err"}};

@@ -37,6 +37,8 @@ private:
 
     Token getIdent(char* sp);
 
+    Token getNumber(char* sp);
+
 public:
     Scanner(std::string_view src);
 
