@@ -32,6 +32,25 @@ bool Scanner::isEligibleForIdent(char* ip)
     return isalpha(*ip) || isdigit(*ip) || *ip == '_';
 }
 
+bool Scanner::checkKW(char** ip, std::string_view kw)
+{
+    std::cout << "checking...\n";
+    if (matchStr((*ip - 1), kw, kw.length())) {
+        *ip += kw.length() - 1;
+
+        std::cout << "matched\n";
+
+        return !isEligibleForIdent(*ip);
+
+        //if (isEligibleForIdent(*ip))
+        //    return false;
+        //return true;
+    }
+    std::cout << "returning false...\n";
+
+    return false;
+}
+
 Token Scanner::nextToken()
 {
     char character{};
@@ -43,60 +62,29 @@ Token Scanner::nextToken()
         std::cout << character << '\n';
         switch (character) {
         case 'i': {
-            /* Check for keyword if */
-            if (matchStr((ip - 1), "if", 2)) {
-                std::cout << "FOUND IF!\n";
-                /* Move ip to the spot right after the last character
-                  of the keyword */
-                ip += 1;
-
-                /* If the character that ip is pointing to is an eligible
-                 character for an identifier, break because it is an
-                identifier */
-                if (isEligibleForIdent(ip)) {
-                    break;
-                }
+            if (checkKW(&ip, "if")) {
+                std::cout << "Found if!\n";
                 return Token{TokenType::IF, std::string{sp, 2}};
             }
             break;
         }
         case 'f': {
             /* Check for keyword "for" */
-            if (matchStr((ip - 1), "for", 3)) {
+            if (checkKW(&ip, "for")) {
                 std::cout << "FOUND FOR!\n";
-
-                ip += 2;
-
-                if (isEligibleForIdent(ip)) {
-                    break;
-                }
-
                 return Token{TokenType::FOR, std::string{sp, 3}};
             }
 
-            if (matchStr((ip - 1), "funct", 5)) {
+            if (checkKW(&ip, "funct")) {
                 std::cout << "FOUND FUNCT\n";
-
-                ip += 4;
-
-                if (isEligibleForIdent(ip)) {
-                    break;
-                }
-
                 return Token{TokenType::FUNCT, std::string{sp, 5}};
             }
             break;
         }
         case 'l': {
             /* Check for keyword loop */
-            if (matchStr((ip - 1), "loop", 4)) {
+            if (checkKW(&ip, "loop")) {
                 std::cout << "FOUND LOOP!\n";
-
-                ip += 3;
-
-                if (isEligibleForIdent(ip)) {
-                    break;
-                }
                 return Token{TokenType::LOOP, std::string{sp, 4}};
             }
             break;

@@ -33,6 +33,8 @@ private:
 
     bool isEligibleForIdent(char* ip);
 
+    bool checkKW(char** ip, std::string_view cmp);
+
 public:
     Scanner(std::string_view src);
 
