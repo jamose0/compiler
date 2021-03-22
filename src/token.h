@@ -47,6 +47,9 @@ enum class TokenType {
     /* Literals */
     INTEGER,
     FLOATING,
+
+    /* Error */
+    ERROR,
 };
 
 class Token

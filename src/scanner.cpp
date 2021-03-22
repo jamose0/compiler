@@ -161,11 +161,10 @@ Token Scanner::nextToken()
         while (isEligibleForIdent()) {
             character = nextChar();
         }
+
+        return Token{TokenType::IDENTIFIER,
+            std::string{sp, static_cast<size_t>(m_ip - sp)}};
     }
 
-    /* return statements should go in if statements. For example, we
-     should only be returning a Token with type identifier if the Token
-     is actually an identifier! */
-    return Token{TokenType::IDENTIFIER,
-        std::string{sp, static_cast<size_t>(m_ip - sp)}};
+    return Token{TokenType::ERROR, std::string{"err"}};
 }
