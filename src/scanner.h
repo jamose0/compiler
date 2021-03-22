@@ -31,6 +31,8 @@ private:
 
     //bool matchStr(char* p1, std::string_view p2, int len);
 
+    char rollBack();
+
     bool isEligibleForIdent();
 
     bool checkKW(std::string_view cmp);

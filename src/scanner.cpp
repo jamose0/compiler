@@ -24,6 +24,11 @@ char Scanner::peekChar()
     return *m_ip;
 }
 
+char Scanner::rollBack()
+{
+    return *(--m_ip);
+}
+
 bool Scanner::isEligibleForIdent()
 {
     return isalpha(*m_ip) || isdigit(*m_ip) || *m_ip == '_';
@@ -55,20 +60,21 @@ Token Scanner::getIdent(char* sp)
 
 Token Scanner::getNumber(char* sp)
 {
-    while (isdigit(*m_ip)) {
+    while (isdigit(nextChar()));
+
+    rollBack();
+
+    if (peekChar() == '.') {
+        std::cout << "float\n";
+
         nextChar();
-    }
 
-    if (*m_ip == '.') {
-
-        nextChar();
-
-        while (isdigit(*m_ip)) {
-            nextChar();
-        }
+        while (isdigit(nextChar()));
 
         /* Since the last loop ended, we know that the current char is
          not a digit; thus we can use isEligibleForIdent */
+
+        rollBack();
 
         if (isEligibleForIdent()) {
             return Token{TokenType::ERROR, std::string{"err"}};
