@@ -47,6 +47,10 @@ bool Scanner::checkKW(std::string_view kw)
 Token Scanner::nextToken()
 {
     char character{};
+
+    while (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n') {
+        ++m_ip;
+    }
     char* sp = m_ip;
     // std::cout << character << '\n';
 
