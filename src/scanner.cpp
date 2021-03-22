@@ -19,7 +19,7 @@ char Scanner::peekChar()
     return *ip;
 }
 
-bool matchStr(char* p1, std::string_view p2, int len) 
+bool Scanner::matchStr(char* p1, std::string_view p2, int len) 
 {
     if (strncmp(p1, p2.data(), len)  == 0)
         return true;
@@ -34,8 +34,13 @@ Token Scanner::nextToken()
     switch (character) {
     case 'i': {
         /* Check for keyword if */
-        //if ()
+        if (matchStr((ip - 1), "if", 2)) {
+            std::cout << "FOUND IF!\n";
+        }
+        break;
     }
+    default:
+        std::cout << "NOT IF!\n";
     }
     return Token{TokenType::IDENTIFIER, "x"};
 }
