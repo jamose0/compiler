@@ -17,6 +17,7 @@
  * continue
  * int
  * real
+ * return
  * else
  * match
  * string
@@ -35,9 +36,12 @@ enum class TokenType {
     CONTINUE,
     INT,
     REAL,
+    RETURN,
     ELSE,
     MATCH,
     STRING,
+
+    /* Not keyword */
     IDENTIFIER,
 
     /* Literals */

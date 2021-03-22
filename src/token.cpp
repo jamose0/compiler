@@ -60,6 +60,10 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "REAL";
         break;
     }
+    case TokenType::RETURN: {
+        out << "RETURN";
+        break;
+    }
     case TokenType::ELSE: {
         out << "ELSE";
         break;

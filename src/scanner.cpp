@@ -63,6 +63,12 @@ Token Scanner::nextToken()
                 std::cout << "Found if!\n";
                 return Token{TokenType::IF, std::string{sp, 2}};
             }
+
+            if (checkKW("int")) {
+                std::cout << "FOUND INT!\n";
+                return Token{TokenType::INT, std::string{sp, 3}};
+            }
+
             break;
         }
         case 'f': {
@@ -83,6 +89,62 @@ Token Scanner::nextToken()
             if (checkKW("loop")) {
                 std::cout << "FOUND LOOP!\n";
                 return Token{TokenType::LOOP, std::string{sp, 4}};
+            }
+            break;
+        }
+        case 'v': {
+            /* Check for keyword "var" */
+            if (checkKW("var")) {
+                std::cout << "FOUND VAR!\n";
+                return Token{TokenType::VAR, std::string{sp, 3}};
+            }
+            break;
+        }
+        case 'c': {
+            if (checkKW("class")) {
+                std::cout << "FOUND CLASS!\n";
+                return Token{TokenType::CLASS, std::string{sp, 5}};
+            }
+
+            if (checkKW("continue")) {
+                std::cout << "FOUND CONTINUE!\n";
+                return Token{TokenType::CONTINUE, std::string{sp, 8}};
+            }
+
+            break;
+        }
+        case 'r': {
+            if (checkKW("return")) {
+                std::cout << "FOUND RETURN!\n";
+                return Token{TokenType::RETURN, std::string{sp, 6}};
+            }
+
+            if (checkKW("real")) {
+                std::cout << "FOUND REAL!\n";
+                return Token{TokenType::REAL, std::string{sp, 4}};
+            }
+
+            break;
+        }
+        case 'e': {
+            if (checkKW("else")) {
+                std::cout << "FOUND ELSE!\n";
+                return Token{TokenType::ELSE, std::string{sp, 4}};
+            }
+
+            break;
+        }
+        case 'm': {
+            if (checkKW("match")) {
+                std::cout << "FOUND MATCH!\n";
+                return Token{TokenType::MATCH, std::string{sp, 5}};
+            }
+            break;
+        }
+        case 's': {
+            if (checkKW("string")) {
+                std::cout << "FOUND STRING!\n";
+                return Token{TokenType::MATCH, std::string{sp, 6}};
             }
             break;
         }
