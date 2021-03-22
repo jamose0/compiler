@@ -5,7 +5,7 @@
 
 int main()
 {
-    Scanner s{"functstring"};
+    Scanner s{"funct string"};
     std::cout << s.nextToken() << '\n';
     return 0;
 }

@@ -17,31 +17,71 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
     out << "Type: ";
     switch (t.m_type) {
     case TokenType::IF: {
-        out << "if";
+        out << "IF";
+        break;
+    }
+    case TokenType::FOR: {
+        out << "FOR";
         break;
     }
     case TokenType::WHILE: {
-        out << "while";
+        out << "WHILE";
         break;
     }
     case TokenType::LOOP: {
-        out << "loop";
-        break;
-    }
-    case TokenType::IDENTIFIER: {
-        out << "ident";
-        break;
-    }
-    case TokenType::INTEGER: {
-        out << "int";
-        break;
-    }
-    case TokenType::REAL: {
-        out << "real";
+        out << "LOOP";
         break;
     }
     case TokenType::FUNCT: {
-        out << "funct";
+        out << "FUNCT";
+        break;
+    }
+    case TokenType::VAR: {
+        out << "VAR";
+        break;
+    }
+    case TokenType::CLASS: {
+        out << "CLASS";
+        break;
+    }
+    case TokenType::BREAK: {
+        out << "BREAK";
+        break;
+    }
+    case TokenType::CONTINUE: {
+        out << "CONTINUE";
+        break;
+    }
+    case TokenType::INT: {
+        out << "INT";
+        break;
+    }
+    case TokenType::REAL: {
+        out << "REAL";
+        break;
+    }
+    case TokenType::ELSE: {
+        out << "ELSE";
+        break;
+    }
+    case TokenType::MATCH: {
+        out << "MATCH";
+        break;
+    }
+    case TokenType::STRING: {
+        out << "STRING";
+        break;
+    }
+    case TokenType::IDENTIFIER: {
+        out << "IDENTIFIER";
+        break;
+    }
+    case TokenType::INTEGER: {
+        out << "INTEGER";
+        break;
+    }
+    case TokenType::FLOATING: {
+        out << "FLOATING";
         break;
     }
     default: {

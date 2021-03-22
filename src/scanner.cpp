@@ -83,7 +83,7 @@ Token Scanner::nextToken()
                     break;
                 }
 
-                return Token{TokenType::FOR, std::string{sp, 5}};
+                return Token{TokenType::FUNCT, std::string{sp, 5}};
             }
             break;
         }
