@@ -94,7 +94,7 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
     }
     }
 
-    out << " Lexeme: " << t.m_lexeme;
+    out << " Lexeme: |" << t.m_lexeme << '|';
 
     return out;
 }

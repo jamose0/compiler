@@ -100,7 +100,8 @@ Token Scanner::nextToken()
 
 
     character = nextChar();
-    std::cout << character << '\n';
+    std::cout << '\n';
+    //std::cout << character << '\n';
     switch (character) {
     case 'i': {
         if (checkKW("if")) {
@@ -191,6 +192,13 @@ Token Scanner::nextToken()
         }
         break;
     }
+    case '}': return Token{TokenType::R_BRACE, std::string{character}};
+    case '{': return Token{TokenType::L_BRACE, std::string{character}};
+    case ']': return Token{TokenType::R_SQUARE, std::string{character}};
+    case '[': return Token{TokenType::L_SQUARE, std::string{character}};
+    case ')': return Token{TokenType::R_PAREN, std::string{character}};
+    case '(': return Token{TokenType::L_PAREN, std::string{character}};
+    case ';': return Token{TokenType::SEMICOLON, std::string{character}};
     default: {
         std::cout << "NOT KW!\n";
         if (isalpha(character) || character == '_') {
