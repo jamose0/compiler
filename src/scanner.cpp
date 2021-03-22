@@ -24,14 +24,6 @@ char Scanner::peekChar()
     return *m_ip;
 }
 
-//bool Scanner::matchStr(char* p1, std::string_view p2, int len) 
-//{
-//if (strncmp(p1, p2.data(), len)  == 0)
-//return true;
-
-//return false;
-//}
-
 bool Scanner::isEligibleForIdent()
 {
     return isalpha(*m_ip) || isdigit(*m_ip) || *m_ip == '_';
