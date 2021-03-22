@@ -5,7 +5,9 @@
 
 int main()
 {
-    Scanner s{"\n  \t\n 83{} st{}ring"};
-    std::cout << s.nextToken() << '\n';
+    Scanner s{"\n  \t\n 83 string fun"};
+    std::cout << s.nextToken()
+              << ' ' << s.nextToken()
+              << ' ' << s.nextToken() << '\n';
     return 0;
 }
