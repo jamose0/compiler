@@ -31,16 +31,25 @@ Token Scanner::nextToken()
 {
     char character = nextChar();
     // std::cout << character << '\n';
-    switch (character) {
-    case 'i': {
-        /* Check for keyword if */
-        if (matchStr((ip - 1), "if", 2)) {
-            std::cout << "FOUND IF!\n";
+
+    for (;;) {
+        switch (character) {
+        case 'i': {
+            /* Check for keyword if */
+            if (matchStr((ip - 1), "if", 2)) {
+                std::cout << "FOUND IF!\n";
+                return Token{TokenType::IF, std::string{(ip - 1), 2}};
+            }
+            break;
+        }
+        default: {
+            std::cout << "NOT KW!\n";
+            if (isalpha(character) || character == '_') {
+                std::cout << "BEGINNING OF IDENT\n";
+            }
+        }
         }
         break;
-    }
-    default:
-        std::cout << "NOT IF!\n";
     }
     return Token{TokenType::IDENTIFIER, "x"};
 }
