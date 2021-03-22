@@ -140,6 +140,22 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "MINUS";
         break;
     }
+    case TokenType::EQ: {
+        out << "EQ";
+        break;
+    }
+    case TokenType::BANG: {
+        out << "BANG";
+        break;
+    }
+    case TokenType::EQ_EQ: {
+        out << "EQ_EQ";
+        break;
+    }
+    case TokenType::BANG_EQ: {
+        out << "BANG_EQ";
+        break;
+    }
     case TokenType::ERROR: {
         out << "ERROR";
         break;

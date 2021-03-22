@@ -63,6 +63,10 @@ enum class TokenType {
     SLASH,
     PLUS,
     MINUS,
+    EQ,
+    BANG,
+    EQ_EQ,
+    BANG_EQ,
 
     /* Error */
     ERROR,
