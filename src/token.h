@@ -5,14 +5,44 @@
 #include <iostream>
 #include <string_view>
 
+/* List of keywords
+ * if
+ * for
+ * while
+ * loop
+ * funct
+ * var
+ * class
+ * break
+ * continue
+ * int
+ * real
+ * else
+ * match
+ * string
+ */
+
 enum class TokenType {
+    /* Keywords (listed above) */
     IF,
+    FOR,
     WHILE,
     LOOP,
-    IDENTIFIER,
-    INTEGER,
-    REAL,
     FUNCT,
+    VAR,
+    CLASS,
+    BREAK,
+    CONTINUE,
+    INT,
+    REAL,
+    ELSE,
+    MATCH,
+    STRING,
+    IDENTIFIER,
+
+    /* Literals */
+    INTEGER,
+    FLOATING,
 };
 
 class Token
