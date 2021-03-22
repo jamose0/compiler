@@ -169,12 +169,6 @@ Token Scanner::nextToken()
         std::cout << "Beginning of ident\n";
 
         return getIdent(sp);
-        //while (isEligibleForIdent()) {
-        //character = nextChar();
-        //}
-
-        //return Token{TokenType::IDENTIFIER,
-        //std::string{sp, static_cast<size_t>(m_ip - sp)}};
     }
 
     return Token{TokenType::ERROR, std::string{"err"}};
