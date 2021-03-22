@@ -38,10 +38,6 @@ bool Scanner::checkKW(std::string_view kw)
         std::cout << "matched\n";
 
         return !isEligibleForIdent();
-
-        //if (isEligibleForIdent(*ip))
-        //    return false;
-        //return true;
     }
     std::cout << "returning false...\n";
 
