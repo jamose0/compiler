@@ -152,7 +152,7 @@ Token Scanner::nextToken()
     case 's': {
         if (checkKW("string")) {
             std::cout << "FOUND STRING!\n";
-            return Token{TokenType::MATCH, std::string{sp, 6}};
+            return Token{TokenType::STRING, std::string{sp, 6}};
         }
         break;
     }
