@@ -60,6 +60,33 @@ Token Scanner::nextToken()
             }
             break;
         }
+        case 'f': {
+            /* Check for keyword "for" */
+            if (matchStr((ip - 1), "for", 3)) {
+                std::cout << "FOUND FOR!\n";
+
+                ip += 2;
+
+                if (isEligibleForIdent(ip)) {
+                    break;
+                }
+
+                return Token{TokenType::FOR, std::string{sp, 3}};
+            }
+
+            if (matchStr((ip - 1), "funct", 5)) {
+                std::cout << "FOUND FUNCT\n";
+
+                ip += 4;
+
+                if (isEligibleForIdent(ip)) {
+                    break;
+                }
+
+                return Token{TokenType::FOR, std::string{sp, 5}};
+            }
+            break;
+        }
         case 'l': {
             /* Check for keyword loop */
             if (matchStr((ip - 1), "loop", 4)) {
