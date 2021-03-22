@@ -152,8 +152,17 @@ Token Scanner::nextToken()
         if (isalpha(character) || character == '_') {
             std::cout << "BEGINNING OF IDENT\n";
         }
+        break;
     }
     }
 
-    return Token{TokenType::IDENTIFIER, "x"};
+    if (isalpha(character) || character == '_') {
+        std::cout << "Beginning of ident\n";
+        while (isEligibleForIdent()) {
+            character = nextChar();
+        }
+    }
+
+    return Token{TokenType::IDENTIFIER,
+        std::string{sp, static_cast<size_t>(m_ip - sp)}};
 }
