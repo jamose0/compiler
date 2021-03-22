@@ -163,6 +163,9 @@ Token Scanner::nextToken()
         }
     }
 
+    /* return statements should go in if statements. For example, we
+     should only be returning a Token with type identifier if the Token
+     is actually an identifier! */
     return Token{TokenType::IDENTIFIER,
         std::string{sp, static_cast<size_t>(m_ip - sp)}};
 }
