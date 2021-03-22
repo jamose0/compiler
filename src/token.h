@@ -48,6 +48,22 @@ enum class TokenType {
     INTEGER,
     FLOATING,
 
+    /* Punctuation */
+    R_BRACE,
+    L_BRACE,
+    R_SQUARE,
+    L_SQUARE,
+    R_PAREN,
+    L_PAREN,
+    SEMICOLON,
+
+    /* Operators */
+    COMMA,
+    STAR,
+    SLASH,
+    PLUS,
+    MINUS,
+
     /* Error */
     ERROR,
 };
