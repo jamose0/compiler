@@ -5,7 +5,7 @@
 
 int main()
 {
-    Scanner s{"\n  \t\n {27\n }"};
+    Scanner s{"\n  \t\n 37 !=12"};
     std::cout << s.nextToken()
               << ' ' << s.nextToken()
               << ' ' << s.nextToken() << '\n';

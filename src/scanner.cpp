@@ -199,6 +199,27 @@ Token Scanner::nextToken()
     case ')': return Token{TokenType::R_PAREN, std::string{character}};
     case '(': return Token{TokenType::L_PAREN, std::string{character}};
     case ';': return Token{TokenType::SEMICOLON, std::string{character}};
+    case ',': return Token{TokenType::COMMA, std::string{character}};
+    case '*': return Token{TokenType::STAR, std::string{character}};
+    case '/': return Token{TokenType::SLASH, std::string{character}};
+    case '+': return Token{TokenType::PLUS, std::string{character}};
+    case '-': return Token{TokenType::MINUS, std::string{character}};
+    case '=': {
+        if (*m_ip == '=') {
+            nextChar();
+            return Token{TokenType::EQ_EQ, std::string{(m_ip - 2), 2}};
+        } else {
+            return Token{TokenType::EQ, std::string{character}};
+        }
+    }
+    case '!': {
+        if (*m_ip == '=') {
+            nextChar();
+            return Token{TokenType::BANG_EQ, std::string{(m_ip - 2), 2}};
+        } else {
+            return Token{TokenType::BANG, std::string{character}};
+        }
+    }
     default: {
         std::cout << "NOT KW!\n";
         if (isalpha(character) || character == '_') {
