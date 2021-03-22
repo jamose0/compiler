@@ -21,7 +21,7 @@ private:
     const std::string m_src;
 
     // Pointer to item of string
-    char* ip;
+    char* m_ip;
 
     // Consume and return the next character of the source string
     char nextChar();
@@ -31,7 +31,7 @@ private:
 
     bool matchStr(char* p1, std::string_view p2, int len);
 
-    bool isEligibleForIdent(char* ip);
+    bool isEligibleForIdent();
 
     bool checkKW(std::string_view cmp);
 

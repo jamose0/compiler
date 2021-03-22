@@ -6,17 +6,17 @@
 Scanner::Scanner(std::string_view src)
     : m_src{src}
 {
-    ip = const_cast<char*>(m_src.data());
+    m_ip = const_cast<char*>(m_src.data());
 }
 
 char Scanner::nextChar()
 {
-    return *(ip++);
+    return *(m_ip++);
 }
 
 char Scanner::peekChar()
 {
-    return *ip;
+    return *m_ip;
 }
 
 bool Scanner::matchStr(char* p1, std::string_view p2, int len) 
@@ -27,20 +27,20 @@ bool Scanner::matchStr(char* p1, std::string_view p2, int len)
     return false;
 }
 
-bool Scanner::isEligibleForIdent(char* ip)
+bool Scanner::isEligibleForIdent()
 {
-    return isalpha(*ip) || isdigit(*ip) || *ip == '_';
+    return isalpha(*m_ip) || isdigit(*m_ip) || *m_ip == '_';
 }
 
 bool Scanner::checkKW(std::string_view kw)
 {
     std::cout << "checking...\n";
-    if (matchStr((ip - 1), kw, kw.length())) {
-        ip += kw.length() - 1;
+    if (matchStr((m_ip - 1), kw, kw.length())) {
+        m_ip += kw.length() - 1;
 
         std::cout << "matched\n";
 
-        return !isEligibleForIdent(ip);
+        return !isEligibleForIdent();
 
         //if (isEligibleForIdent(*ip))
         //    return false;
@@ -54,7 +54,7 @@ bool Scanner::checkKW(std::string_view kw)
 Token Scanner::nextToken()
 {
     char character{};
-    char* sp = ip;
+    char* sp = m_ip;
     // std::cout << character << '\n';
 
     for (;;) {
