@@ -5,7 +5,7 @@
 
 int main()
 {
-    Scanner s{"loop string"};
+    Scanner s{"loopestring"};
     std::cout << s.nextToken() << '\n';
     return 0;
 }

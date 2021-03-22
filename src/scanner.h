@@ -1,6 +1,13 @@
 #ifndef SCANNER_H
 #define SCANNER_H
 
+/*
+*  Header file for the Scanner class
+*
+*  By the way, I already know that the scanner design
+*  might be fairly stupid...
+*/
+
 #include "token.h"
 
 #include <string>
@@ -23,6 +30,8 @@ private:
     char peekChar();
 
     bool matchStr(char* p1, std::string_view p2, int len);
+
+    bool isEligibleForIdent(char* ip);
 
 public:
     Scanner(std::string_view src);

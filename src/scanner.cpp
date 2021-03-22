@@ -27,18 +27,36 @@ bool Scanner::matchStr(char* p1, std::string_view p2, int len)
     return false;
 }
 
+bool Scanner::isEligibleForIdent(char* ip)
+{
+    return isalpha(*ip) || isdigit(*ip) || *ip == '_';
+}
+
 Token Scanner::nextToken()
 {
-    char character = nextChar();
+    char character{};
+    char* sp = ip;
     // std::cout << character << '\n';
 
     for (;;) {
+        character = nextChar();
+        std::cout << character << '\n';
         switch (character) {
         case 'i': {
             /* Check for keyword if */
             if (matchStr((ip - 1), "if", 2)) {
                 std::cout << "FOUND IF!\n";
-                return Token{TokenType::IF, std::string{(ip - 1), 2}};
+                /* Move ip to the spot right after the last character
+                  of the keyword */
+                ip += 1;
+
+                /* If the character that ip is pointing to is an eligible
+                 character for an identifier, break because it is an
+                identifier */
+                if (isEligibleForIdent(ip)) {
+                    break;
+                }
+                return Token{TokenType::IF, std::string{sp, 2}};
             }
             break;
         }
@@ -46,7 +64,13 @@ Token Scanner::nextToken()
             /* Check for keyword loop */
             if (matchStr((ip - 1), "loop", 4)) {
                 std::cout << "FOUND LOOP!\n";
-                return Token{TokenType::LOOP, std::string{(ip -1), 4}};
+
+                ip += 3;
+
+                if (isEligibleForIdent(ip)) {
+                    break;
+                }
+                return Token{TokenType::LOOP, std::string{sp, 4}};
             }
             break;
         }
