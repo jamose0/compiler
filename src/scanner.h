@@ -10,11 +10,19 @@
 class Scanner
 {
 private:
+    // source string
     const std::string m_src;
+
+    // Pointer to item of string
     char* ip;
 
+    // Consume and return the next character of the source string
     char nextChar();
+
+    // Return but do not return the next character of the source string
     char peekChar();
+
+    bool matchStr(char* p1, std::string_view p2, int len);
 
 public:
     Scanner(std::string_view src);
