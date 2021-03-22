@@ -42,6 +42,14 @@ Token Scanner::nextToken()
             }
             break;
         }
+        case 'l': {
+            /* Check for keyword loop */
+            if (matchStr((ip - 1), "loop", 4)) {
+                std::cout << "FOUND LOOP!\n";
+                return Token{TokenType::LOOP, std::string{(ip -1), 4}};
+            }
+            break;
+        }
         default: {
             std::cout << "NOT KW!\n";
             if (isalpha(character) || character == '_') {

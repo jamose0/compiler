@@ -24,6 +24,10 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "while";
         break;
     }
+    case TokenType::LOOP: {
+        out << "loop";
+        break;
+    }
     case TokenType::IDENTIFIER: {
         out << "ident";
         break;

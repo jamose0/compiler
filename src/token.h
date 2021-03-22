@@ -8,6 +8,7 @@
 enum class TokenType {
     IF,
     WHILE,
+    LOOP,
     IDENTIFIER,
     INTEGER,
     REAL,
