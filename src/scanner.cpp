@@ -71,14 +71,7 @@ Token Scanner::getNumber(char* sp)
 
         while (isdigit(nextChar()));
 
-        /* Since the last loop ended, we know that the current char is
-         not a digit; thus we can use isEligibleForIdent */
-
         rollBack();
-
-        if (isEligibleForIdent()) {
-            return Token{TokenType::ERROR, std::string{"err"}};
-        }
 
         return Token{TokenType::FLOATING,
             std::string{sp, static_cast<size_t>(m_ip - sp)}};
