@@ -57,6 +57,7 @@ enum class TokenType {
     R_PAREN,
     L_PAREN,
     SEMICOLON,
+    COLON,
 
     /* Operators */
     COMMA,

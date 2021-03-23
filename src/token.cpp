@@ -124,6 +124,10 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "SEMICOLON";
         break;
     }
+    case TokenType::COLON: {
+        out << "COLON";
+        break;
+    }
     case TokenType::COMMA: {
         out << "COMMA";
         break;

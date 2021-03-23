@@ -201,6 +201,7 @@ Token Scanner::nextToken()
     case ')': return Token{TokenType::R_PAREN, std::string{character}};
     case '(': return Token{TokenType::L_PAREN, std::string{character}};
     case ';': return Token{TokenType::SEMICOLON, std::string{character}};
+    case ':': return Token{TokenType::COLON, std::string{character}};
     case ',': return Token{TokenType::COMMA, std::string{character}};
     case '*': return Token{TokenType::STAR, std::string{character}};
     case '/': return Token{TokenType::SLASH, std::string{character}};
