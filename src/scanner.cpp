@@ -36,10 +36,6 @@ bool Scanner::isEligibleForIdent()
 
 bool Scanner::checkKW(std::string_view kw)
 {
-    /* This function has a very serious bug: int vs interface, for example
-    matchStr returns true and the pointer moves forwards, so when we match
-    interface it doesn't work. Unfortunately, we need this functionality
-    to get identifiers. We should do longest strings first. */
     std::cout << "checking...\n";
     if (matchStr((m_ip - 1), kw, kw.length())) {
         m_ip += kw.length() - 1;
