@@ -78,6 +78,18 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "STRING";
         break;
     }
+    case TokenType::PUB: {
+        out << "PUB";
+        break;
+    }
+    case TokenType::INTERFACE: {
+        out << "INTERFACE";
+        break;
+    }
+    case TokenType::IMPORT: {
+        out << "IMPORT";
+        break;
+    }
         /* Not keywords */
     case TokenType::IDENTIFIER: {
         out << "IDENTIFIER";

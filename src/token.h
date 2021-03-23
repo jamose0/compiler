@@ -21,6 +21,9 @@
  * else
  * match
  * string
+ * pub
+ * interface
+ * import
  */
 
 enum class TokenType {
@@ -40,6 +43,9 @@ enum class TokenType {
     ELSE,
     MATCH,
     STRING,
+    PUB,
+    INTERFACE,
+    IMPORT,
 
     /* Not keyword */
     IDENTIFIER,

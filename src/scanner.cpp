@@ -115,6 +115,16 @@ Token Scanner::nextToken()
             std::cout << "FOUND INT!\n";
             return Token{TokenType::INT, std::string{sp, 3}};
         }
+
+        if (checkKW("import")) {
+            std::cout << "IMPORT!\n";
+            return Token{TokenType::IMPORT, std::string{sp, 6}};
+        }
+
+        if (checkKW("interface")) {
+            std::cout << "FOUND INTERFACE!\n";
+            return Token{TokenType::INTERFACE, std::string{sp, 9}};
+        }
         break;
     }
     case 'f': {
@@ -191,6 +201,13 @@ Token Scanner::nextToken()
         if (checkKW("string")) {
             std::cout << "FOUND STRING!\n";
             return Token{TokenType::STRING, std::string{sp, 6}};
+        }
+        break;
+    }
+    case 'p': {
+        if (checkKW("pub")) {
+            std::cout << "FOUND PUB!\n";
+            return Token{TokenType::PUB, std::string{sp, 3}};
         }
         break;
     }
