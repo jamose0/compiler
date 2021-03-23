@@ -36,6 +36,10 @@ bool Scanner::isEligibleForIdent()
 
 bool Scanner::checkKW(std::string_view kw)
 {
+    /* This function has a very serious bug: int vs interface, for example
+    matchStr returns true and the pointer moves forwards, so when we match
+    interface it doesn't work. Unfortunately, we need this functionality
+    to get identifiers. We should do longest strings first. */
     std::cout << "checking...\n";
     if (matchStr((m_ip - 1), kw, kw.length())) {
         m_ip += kw.length() - 1;
@@ -93,6 +97,7 @@ Token Scanner::nextToken()
     while (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n') {
         ++m_ip;
     }
+
     char* sp = m_ip;
     // std::cout << character << '\n';
 
@@ -100,43 +105,51 @@ Token Scanner::nextToken()
     character = nextChar();
     std::cout << '\n';
 
-    //if (character == EOF || character == '\0') {
-    //   return Token{TokenType::EOF, "end"};
-    //}
-    //std::cout << character << '\n';
+    /* Bugfix: I noticed that the 'interface' keyword was being recognized
+       as an identifier. This was because the if(checkKW) statement for
+       'interface' was below the if(checkKW) statement for 'int'. Since the
+       first three characters match, checkKW moved the m_ip pointer. When
+       control reached the if(checkKW) for 'interface', the pointer was at
+       'e', so it checkKW returned false. To fix this, I reordered many of
+       if statements to check the longest string first. I could reimplement
+       checkKW to not move the pointer, but this could cause more problems*/
     switch (character) {
+    case '#': {
+        while (*(m_ip++) != '\n');
+        break;
+    }
     case 'i': {
-        if (checkKW("if")) {
-            std::cout << "Found if!\n";
-            return Token{TokenType::IF, std::string{sp, 2}};
-        }
 
-        if (checkKW("int")) {
-            std::cout << "FOUND INT!\n";
-            return Token{TokenType::INT, std::string{sp, 3}};
+        if (checkKW("interface")) {
+            std::cout << "INTERFACE!!!!\n";
+            return Token{TokenType::INTERFACE, std::string{sp, 9}};
         }
-
+        if (checkKW("implement")) {
+            std::cout << "IMPLEMENT!\n";
+            return Token{TokenType::IMPLEMENT, std::string{sp, 9}};
+        }
         if (checkKW("import")) {
             std::cout << "IMPORT!\n";
             return Token{TokenType::IMPORT, std::string{sp, 6}};
         }
-
-        if (checkKW("interface")) {
-            std::cout << "FOUND INTERFACE!\n";
-            return Token{TokenType::INTERFACE, std::string{sp, 9}};
+        if (checkKW("int")) {
+            std::cout << "INT!\n";
+            return Token{TokenType::INT, std::string{sp, 3}};
+        }
+        if (checkKW("if")) {
+            std::cout << "Found if!\n";
+            return Token{TokenType::IF, std::string{sp, 2}};
         }
         break;
     }
     case 'f': {
-        /* Check for keyword "for" */
+        if (checkKW("funct")) {
+            std::cout << "FUNCT!\n";
+            return Token{TokenType::FUNCT, std::string{sp, 5}};
+        }
         if (checkKW("for")) {
             std::cout << "FOUND FOR!\n";
             return Token{TokenType::FOR, std::string{sp, 3}};
-        }
-
-        if (checkKW("funct")) {
-            std::cout << "FOUND FUNCT\n";
-            return Token{TokenType::FUNCT, std::string{sp, 5}};
         }
         break;
     }
@@ -157,16 +170,14 @@ Token Scanner::nextToken()
         break;
     }
     case 'c': {
+        if (checkKW("continue")) {
+            std::cout << "CONTINUE!\n";
+            return Token{TokenType::CONTINUE, std::string{sp, 8}};
+        }
         if (checkKW("class")) {
             std::cout << "FOUND CLASS!\n";
             return Token{TokenType::CLASS, std::string{sp, 5}};
         }
-
-        if (checkKW("continue")) {
-            std::cout << "FOUND CONTINUE!\n";
-            return Token{TokenType::CONTINUE, std::string{sp, 8}};
-        }
-
         break;
     }
     case 'r': {

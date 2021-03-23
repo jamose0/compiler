@@ -90,6 +90,10 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "IMPORT";
         break;
     }
+    case TokenType::IMPLEMENT: {
+        out << "IMPLEMENT";
+        break;
+    }
         /* Not keywords */
     case TokenType::IDENTIFIER: {
         out << "IDENTIFIER";

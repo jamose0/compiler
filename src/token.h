@@ -24,6 +24,7 @@
  * pub
  * interface
  * import
+ * implement
  */
 
 enum class TokenType {
@@ -46,6 +47,7 @@ enum class TokenType {
     PUB,
     INTERFACE,
     IMPORT,
+    IMPLEMENT,
 
     /* Not keyword */
     IDENTIFIER,
