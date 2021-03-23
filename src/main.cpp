@@ -3,11 +3,16 @@
 
 #include <iostream>
 
-int main()
+int main(int argc, char* argv[])
 {
-    Scanner s{"\n  \t\n 3.7. !=12"};
-    std::cout << s.nextToken()
-              << ' ' << s.nextToken()
-              << ' ' << s.nextToken() << '\n';
+    if (argc == 2) {
+        Scanner s{argv[1]};
+
+        while (!s.isAtEnd()) {
+            std::cout << s.nextToken() << ' ';
+        }
+
+        std::cout << "\nend\n";
+    }
     return 0;
 }

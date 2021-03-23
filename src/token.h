@@ -71,6 +71,7 @@ enum class TokenType {
 
     /* Error */
     ERROR,
+    END,
 };
 
 class Token

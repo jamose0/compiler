@@ -47,6 +47,8 @@ public:
     virtual ~Scanner() {}
 
     Token nextToken();
+
+    bool isAtEnd();
 };
 
 #endif

@@ -81,6 +81,11 @@ Token Scanner::getNumber(char* sp)
         std::string{sp, static_cast<size_t>(m_ip - sp)}};
 }
 
+bool Scanner::isAtEnd()
+{
+    return (*m_ip == '\0' || *m_ip == EOF);
+}
+
 Token Scanner::nextToken()
 {
     char character{};
@@ -94,6 +99,10 @@ Token Scanner::nextToken()
 
     character = nextChar();
     std::cout << '\n';
+
+    //if (character == EOF || character == '\0') {
+    //   return Token{TokenType::EOF, "end"};
+    //}
     //std::cout << character << '\n';
     switch (character) {
     case 'i': {
