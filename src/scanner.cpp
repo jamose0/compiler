@@ -97,6 +97,11 @@ Token Scanner::nextToken()
     char character{};
 
     skipWS();
+    if (*m_ip == '#') {
+        std::cout << "comment\n";
+        while (*(m_ip++) != '\n');
+    }
+    skipWS();
 
     char* sp = m_ip;
     // std::cout << character << '\n';
