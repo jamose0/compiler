@@ -160,6 +160,10 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "ERROR";
         break;
     }
+    case TokenType::DOT: {
+        out << "DOT";
+        break;
+    }
     default: {
         out << "No match";
         break;

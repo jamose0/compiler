@@ -197,6 +197,7 @@ Token Scanner::nextToken()
     case '/': return Token{TokenType::SLASH, std::string{character}};
     case '+': return Token{TokenType::PLUS, std::string{character}};
     case '-': return Token{TokenType::MINUS, std::string{character}};
+    case '.': return Token{TokenType::DOT, std::string{character}};
     case '=': {
         if (*m_ip == '=') {
             nextChar();
