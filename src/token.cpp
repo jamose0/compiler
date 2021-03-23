@@ -83,12 +83,16 @@ std::ostream& operator<<(std::ostream& out, const Token &t)
         out << "IDENTIFIER";
         break;
     }
-    case TokenType::INTEGER: {
-        out << "INTEGER";
+    case TokenType::INTEGER_L: {
+        out << "INTEGER_L";
         break;
     }
-    case TokenType::FLOATING: {
-        out << "FLOATING";
+    case TokenType::FLOATING_L: {
+        out << "FLOATING_L";
+        break;
+    }
+    case TokenType::STR_L: {
+        out << "STR_L";
         break;
     }
         /* Punctuation */

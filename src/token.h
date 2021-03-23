@@ -45,8 +45,9 @@ enum class TokenType {
     IDENTIFIER,
 
     /* Literals */
-    INTEGER,
-    FLOATING,
+    INTEGER_L,
+    FLOATING_L,
+    STR_L,
 
     /* Punctuation */
     R_BRACE,
