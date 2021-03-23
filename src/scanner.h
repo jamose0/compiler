@@ -23,6 +23,7 @@ private:
     // Pointer to item of string
     char* m_ip;
 
+    void skipWS();
     // Consume and return the next character of the source string
     char nextChar();
 

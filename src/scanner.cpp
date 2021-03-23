@@ -14,6 +14,12 @@ Scanner::Scanner(std::string_view src)
     m_ip = const_cast<char*>(m_src.data());
 }
 
+void Scanner::skipWS()
+{
+    while (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n')
+        ++m_ip;
+}
+
 char Scanner::nextChar()
 {
     return *(m_ip++);
@@ -90,9 +96,7 @@ Token Scanner::nextToken()
 {
     char character{};
 
-    while (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n') {
-        ++m_ip;
-    }
+    skipWS();
 
     char* sp = m_ip;
     // std::cout << character << '\n';
