@@ -73,11 +73,11 @@ Token Scanner::getNumber(char* sp)
 
         rollBack();
 
-        return Token{TokenType::FLOATING,
+        return Token{TokenType::FLOATING_L,
             std::string{sp, static_cast<size_t>(m_ip - sp)}};
     }
 
-    return Token{TokenType::INTEGER,
+    return Token{TokenType::INTEGER_L,
         std::string{sp, static_cast<size_t>(m_ip - sp)}};
 }
 
@@ -222,6 +222,19 @@ Token Scanner::nextToken()
         } else {
             return Token{TokenType::BANG, std::string{character}};
         }
+    }
+    case '"': {
+        while (*m_ip != '"') {
+
+            if (isAtEnd()) {
+                return Token{TokenType::ERROR, std::string{"Unmatched paren."}};
+            }
+            nextChar();
+        }
+        nextChar();
+
+        return Token{TokenType::STR_L,
+            std::string{(sp + 1), static_cast<size_t>(m_ip - sp - 2)}};
     }
     default: {
         std::cout << "NOT KW!\n";
