@@ -223,6 +223,22 @@ Token Scanner::nextToken()
             return Token{TokenType::BANG, std::string{character}};
         }
     }
+    case '>': {
+        if (*m_ip == '=') {
+            nextChar();
+            return Token{TokenType::GREATER_EQ, std::string{(m_ip - 2), 2}};
+        } else {
+            return Token{TokenType::GREATER, std::string{character}};
+        }
+    }
+    case '<': {
+        if (*m_ip == '=') {
+            nextChar();
+            return Token{TokenType::LESS_EQ, std::string{(m_ip - 2), 2}};
+        } else {
+            return Token{TokenType::LESS, std::string{character}};
+        }
+    }
     case '"': {
         while (*m_ip != '"') {
 

@@ -68,6 +68,10 @@ enum class TokenType {
     BANG,
     EQ_EQ,
     BANG_EQ,
+    GREATER,
+    LESS,
+    GREATER_EQ,
+    LESS_EQ,
     DOT,
 
     /* Error */
