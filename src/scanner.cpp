@@ -283,6 +283,7 @@ Token Scanner::nextToken()
         return getNumber(sp);
     }
 
-    throw(ScannerException{"Unexpected symbol", m_line_num});
+    throw(ScannerException{"Unexpected symbol '" +
+            std::string{sp, 1} + "'", m_line_num});
     return Token{TokenType::ERROR, std::string{"err"}};
 }
