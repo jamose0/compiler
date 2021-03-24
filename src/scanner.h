@@ -25,6 +25,8 @@ private:
     // source string
     const std::string m_src;
 
+    size_t m_line_num;
+
     // Pointer to item of string
     char* m_ip;
 

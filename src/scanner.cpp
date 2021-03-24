@@ -13,12 +13,16 @@ Scanner::Scanner(std::string_view src)
     : m_src{src}
 {
     m_ip = const_cast<char*>(m_src.data());
+    m_line_num = 1;
 }
 
 void Scanner::skipWS()
 {
-    while (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n')
+    while (*m_ip == ' ' || *m_ip == '\t' || *m_ip == '\n') {
+        if (*m_ip == '\n')
+            ++m_line_num;
         ++m_ip;
+    }
 }
 
 char Scanner::nextChar()
@@ -101,6 +105,7 @@ Token Scanner::nextToken()
     if (*m_ip == '#') {
         std::cout << "comment\n";
         while (*(m_ip++) != '\n');
+        ++m_line_num;
     }
     skipWS();
 
@@ -243,9 +248,12 @@ Token Scanner::nextToken()
     }
     case '"': {
         while (*m_ip != '"') {
+            if (*m_ip == '\n') {
+                ++m_line_num;
+            }
 
             if (isAtEnd()) {
-                throw ScannerException{};
+                throw ScannerException{"Unmatched quote", m_line_num};
 //Token{TokenType::ERROR, std::string{"Unmatched paren."}};
             }
             nextChar();
@@ -275,5 +283,6 @@ Token Scanner::nextToken()
         return getNumber(sp);
     }
 
+    throw(ScannerException{"Unexpected symbol", m_line_num});
     return Token{TokenType::ERROR, std::string{"err"}};
 }
