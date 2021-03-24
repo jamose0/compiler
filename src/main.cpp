@@ -3,6 +3,7 @@
 #include "readfile.h"
 
 #include <iostream>
+#include <exception>
 
 int main(int argc, char* argv[])
 {
@@ -11,8 +12,13 @@ int main(int argc, char* argv[])
         std::cout << contents << '\n';
         Scanner s{contents};
 
-        while (!s.isAtEnd()) {
-            std::cout << s.nextToken() << ' ';
+        try {
+
+            while (!s.isAtEnd()) {
+                std::cout << s.nextToken() << ' ';
+            }
+        } catch (const std::exception &s) {
+            std::cerr << s.what();
         }
 
         std::cout << "\nend\n";
