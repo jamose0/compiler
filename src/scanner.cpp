@@ -1,5 +1,6 @@
 #include "scanner.h"
 #include "token.h"
+#include "scannerexception.h"
 
 #include <cstring>
 
@@ -241,7 +242,8 @@ Token Scanner::nextToken()
         while (*m_ip != '"') {
 
             if (isAtEnd()) {
-                return Token{TokenType::ERROR, std::string{"Unmatched paren."}};
+                throw ScannerException{};
+//Token{TokenType::ERROR, std::string{"Unmatched paren."}};
             }
             nextChar();
         }
