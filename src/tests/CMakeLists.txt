@@ -1,3 +1,5 @@
-add_executable(testScanner testScanner.cpp ../scanner.cpp ../token.cpp ../scannerexception.cpp)
+find_package(Catch2 REQUIRED)
+add_executable(testScanner testScanner.cpp testcommon.cpp ../scanner.cpp ../token.cpp ../scannerexception.cpp)
 set_property(TARGET testScanner PROPERTY CXX_STANDARD 17)
+target_link_libraries(testScanner PRIVATE Catch2::Catch2)
 add_test(testScanner testScanner)

@@ -1,17 +1,16 @@
 #include "../scanner.h"
 #include "../token.h"
 
+#include <catch2/catch.hpp>
+
 #include <iostream>
 #include <string>
 
-int main()
+TEST_CASE("one", "[what]")
 {
-    Scanner s{"#comment\n funct main() : () { print(\"hello, world\"); }"};
-    std::cout << "hi\n";
+    Scanner s{"#comment\n funct main() : ();"};
     Token t{s.nextToken()};
-    if (t.getLexeme() == "funct"
-        && t.getType() == TokenType::FUNCT)
-        return 0;
-
-    return 1;
+    REQUIRE(t.getLexeme() == "funct");
+    REQUIRE(t.getType() == TokenType::FUNCT);
 }
+
