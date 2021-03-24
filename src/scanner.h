@@ -14,6 +14,11 @@
 #include <string_view>
 #include <iostream>
 
+/* MACRO */
+#define MAKE_TOK(type, pointer, len) \
+    Token{TokenType::type, std::string{pointer, len}}
+/* END */
+
 class Scanner
 {
 private:

@@ -119,6 +119,8 @@ Token Scanner::nextToken()
        if statements to check the longest string first. I could reimplement
        checkKW to not move the pointer, but this could cause more problems*/
     switch (character) {
+        /* We can use getIdent because in each case, the first character
+           is a letter */
     case '#': {
         while (*(m_ip++) != '\n');
         break;
@@ -126,108 +128,70 @@ Token Scanner::nextToken()
     case 'i': {
 
         if (checkKW("interface")) {
-            std::cout << "INTERFACE!!!!\n";
-            return Token{TokenType::INTERFACE, std::string{sp, 9}};
+            return MAKE_TOK(INTERFACE, sp, 9);
         }
         if (checkKW("implement")) {
-            std::cout << "IMPLEMENT!\n";
-            return Token{TokenType::IMPLEMENT, std::string{sp, 9}};
+            return MAKE_TOK(IMPLEMENT, sp, 9);
         }
         if (checkKW("import")) {
-            std::cout << "IMPORT!\n";
-            return Token{TokenType::IMPORT, std::string{sp, 6}};
+            return MAKE_TOK(IMPORT, sp, 6);
         }
         if (checkKW("int")) {
-            std::cout << "INT!\n";
-            return Token{TokenType::INT, std::string{sp, 3}};
+            return MAKE_TOK(INT, sp, 3);
         }
         if (checkKW("if")) {
-            std::cout << "Found if!\n";
-            return Token{TokenType::IF, std::string{sp, 2}};
+            return MAKE_TOK(IF, sp, 2);
         }
-        break;
+        return getIdent(sp);
     }
     case 'f': {
         if (checkKW("funct")) {
-            std::cout << "FUNCT!\n";
-            return Token{TokenType::FUNCT, std::string{sp, 5}};
+            return MAKE_TOK(FUNCT, sp, 5);
         }
         if (checkKW("for")) {
-            std::cout << "FOUND FOR!\n";
-            return Token{TokenType::FOR, std::string{sp, 3}};
+            return MAKE_TOK(FOR, sp, 3);
         }
-        break;
+        getIdent(sp);
     }
-    case 'l': {
-        /* Check for keyword loop */
-        if (checkKW("loop")) {
-            std::cout << "FOUND LOOP!\n";
-            return Token{TokenType::LOOP, std::string{sp, 4}};
-        }
-        break;
-    }
+    case 'l':
+        return ((checkKW("loop")) ? MAKE_TOK(LOOP, sp, 4) : getIdent(sp));
     case 'v': {
+        return (checkKW("var") ? MAKE_TOK(VAR, sp, 3) : getIdent(sp));
         /* Check for keyword "var" */
-        if (checkKW("var")) {
-            std::cout << "FOUND VAR!\n";
-            return Token{TokenType::VAR, std::string{sp, 3}};
-        }
-        break;
+        //if (checkKW("var")) {
+        //std::cout << "FOUND VAR!\n";
+        //return Token{TokenType::VAR, std::string{sp, 3}};
+        //}
+        //break;
     }
     case 'c': {
         if (checkKW("continue")) {
-            std::cout << "CONTINUE!\n";
-            return Token{TokenType::CONTINUE, std::string{sp, 8}};
+            return MAKE_TOK(CONTINUE, sp, 8);
         }
         if (checkKW("class")) {
-            std::cout << "FOUND CLASS!\n";
-            return Token{TokenType::CLASS, std::string{sp, 5}};
+            return MAKE_TOK(CONTINUE, sp, 5);
         }
-        break;
+        return getIdent(sp);
     }
     case 'r': {
         if (checkKW("return")) {
-            std::cout << "FOUND RETURN!\n";
-            return Token{TokenType::RETURN, std::string{sp, 6}};
+            return MAKE_TOK(RETURN, sp, 6);
         }
-
         if (checkKW("real")) {
-            std::cout << "FOUND REAL!\n";
-            return Token{TokenType::REAL, std::string{sp, 4}};
+            return MAKE_TOK(REAL, sp, 4);
         }
-
-        break;
+        return getIdent(sp);
     }
-    case 'e': {
-        if (checkKW("else")) {
-            std::cout << "FOUND ELSE!\n";
-            return Token{TokenType::ELSE, std::string{sp, 4}};
-        }
-
-        break;
-    }
-    case 'm': {
-        if (checkKW("match")) {
-            std::cout << "FOUND MATCH!\n";
-            return Token{TokenType::MATCH, std::string{sp, 5}};
-        }
-        break;
-    }
-    case 's': {
-        if (checkKW("string")) {
-            std::cout << "FOUND STRING!\n";
-            return Token{TokenType::STRING, std::string{sp, 6}};
-        }
-        break;
-    }
-    case 'p': {
-        if (checkKW("pub")) {
-            std::cout << "FOUND PUB!\n";
-            return Token{TokenType::PUB, std::string{sp, 3}};
-        }
-        break;
-    }
-    case '}': return Token{TokenType::R_BRACE, std::string{character}};
+    case 'e':
+        return ((checkKW("else")) ? MAKE_TOK(ELSE, sp, 4) : getIdent(sp));
+    case 'm':
+        return ((checkKW("match")) ? MAKE_TOK(MATCH, sp, 5) : getIdent(sp));
+    case 's':
+        return ((checkKW("string")) ? MAKE_TOK(STRING, sp, 6) : getIdent(sp));
+    case 'p':
+        return ((checkKW("pub")) ? MAKE_TOK(PUB, sp, 3) : getIdent(sp));
+    case '}': return MAKE_TOK(R_BRACE, sp, 1);
+        /* make the rest of these use MAKE_TOK */
     case '{': return Token{TokenType::L_BRACE, std::string{character}};
     case ']': return Token{TokenType::R_SQUARE, std::string{character}};
     case '[': return Token{TokenType::L_SQUARE, std::string{character}};
@@ -244,33 +208,33 @@ Token Scanner::nextToken()
     case '=': {
         if (*m_ip == '=') {
             nextChar();
-            return Token{TokenType::EQ_EQ, std::string{(m_ip - 2), 2}};
+            return MAKE_TOK(EQ_EQ, sp, 2);
         } else {
-            return Token{TokenType::EQ, std::string{character}};
+            return MAKE_TOK(EQ, sp, 1);
         }
     }
     case '!': {
         if (*m_ip == '=') {
             nextChar();
-            return Token{TokenType::BANG_EQ, std::string{(m_ip - 2), 2}};
+            return MAKE_TOK(BANG_EQ, sp, 2);
         } else {
-            return Token{TokenType::BANG, std::string{character}};
+            return MAKE_TOK(BANG, sp, 1);
         }
     }
     case '>': {
         if (*m_ip == '=') {
             nextChar();
-            return Token{TokenType::GREATER_EQ, std::string{(m_ip - 2), 2}};
+            return MAKE_TOK(GREATER_EQ, sp, 2);
         } else {
-            return Token{TokenType::GREATER, std::string{character}};
+            return MAKE_TOK(GREATER, sp, 1);
         }
     }
     case '<': {
         if (*m_ip == '=') {
             nextChar();
-            return Token{TokenType::LESS_EQ, std::string{(m_ip - 2), 2}};
+            return MAKE_TOK(LESS_EQ, sp, 2);
         } else {
-            return Token{TokenType::LESS, std::string{character}};
+            return MAKE_TOK(LESS, sp, 1);
         }
     }
     case '"': {
@@ -283,8 +247,7 @@ Token Scanner::nextToken()
         }
         nextChar();
 
-        return Token{TokenType::STR_L,
-            std::string{(sp + 1), static_cast<size_t>(m_ip - sp - 2)}};
+        return MAKE_TOK(STR_L, sp + 1, static_cast<size_t>(m_ip - sp - 2));
     }
     default: {
         std::cout << "NOT KW!\n";
