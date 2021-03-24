@@ -122,6 +122,9 @@ Token Scanner::nextToken()
     switch (character) {
         /* We can use getIdent because in each case, the first character
            is a letter */
+
+        // NOTE: Perhaps it would be better if we delegated the token returning
+        // responsibility to checkKW...
     case '#': {
         while (*(m_ip++) != '\n');
         break;
