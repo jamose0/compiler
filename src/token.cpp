@@ -12,6 +12,13 @@ std::string_view Token::getLexeme()
     return m_lexeme;
 }
 
+Token& Token::operator=(const Token &copy)
+{
+    m_type = copy.m_type;
+    m_lexeme.assign(copy.m_lexeme);
+    return *this;
+}
+
 std::ostream& operator<<(std::ostream& out, const Token &t)
 {
     out << "Type: ";

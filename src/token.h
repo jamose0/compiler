@@ -92,7 +92,7 @@ class Token
 {
 private:
     TokenType m_type;
-    const std::string m_lexeme;
+    std::string m_lexeme;
 
 public:
     Token(TokenType type, std::string_view lexeme)
@@ -102,6 +102,8 @@ public:
     TokenType getType();
 
     std::string_view getLexeme();
+
+    Token& operator=(const Token &copy);
 
     virtual ~Token() {}
 
