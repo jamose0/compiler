@@ -201,19 +201,19 @@ Token Scanner::nextToken()
         return ((checkKW("pub")) ? MAKE_TOK(PUB, sp, 3) : getIdent(sp));
     case '}': return MAKE_TOK(R_BRACE, sp, 1);
         /* make the rest of these use MAKE_TOK */
-    case '{': return Token{TokenType::L_BRACE, std::string{character}};
-    case ']': return Token{TokenType::R_SQUARE, std::string{character}};
-    case '[': return Token{TokenType::L_SQUARE, std::string{character}};
-    case ')': return Token{TokenType::R_PAREN, std::string{character}};
-    case '(': return Token{TokenType::L_PAREN, std::string{character}};
-    case ';': return Token{TokenType::SEMICOLON, std::string{character}};
-    case ':': return Token{TokenType::COLON, std::string{character}};
-    case ',': return Token{TokenType::COMMA, std::string{character}};
-    case '*': return Token{TokenType::STAR, std::string{character}};
-    case '/': return Token{TokenType::SLASH, std::string{character}};
-    case '+': return Token{TokenType::PLUS, std::string{character}};
-    case '-': return Token{TokenType::MINUS, std::string{character}};
-    case '.': return Token{TokenType::DOT, std::string{character}};
+    case '{': return MAKE_TOK(L_BRACE, sp, 1);
+    case ']': return MAKE_TOK(R_SQUARE, sp, 1);
+    case '[': return MAKE_TOK(L_SQUARE, sp, 1);
+    case ')': return MAKE_TOK(R_PAREN, sp, 1);
+    case '(': return MAKE_TOK(L_PAREN, sp, 1);
+    case ';': return MAKE_TOK(SEMICOLON, sp, 1);
+    case ':': return MAKE_TOK(COLON, sp, 1);
+    case ',': return MAKE_TOK(COMMA, sp, 1);
+    case '*': return MAKE_TOK(STAR, sp, 1);
+    case '/': return MAKE_TOK(SLASH, sp, 1);
+    case '+': return MAKE_TOK(PLUS, sp, 1);
+    case '-': return MAKE_TOK(MINUS, sp, 1);
+    case '.': return MAKE_TOK(DOT, sp, 1);
     case '=': {
         if (*m_ip == '=') {
             nextChar();
@@ -254,7 +254,6 @@ Token Scanner::nextToken()
 
             if (isAtEnd()) {
                 throw ScannerException{"Unmatched quote", m_line_num};
-//Token{TokenType::ERROR, std::string{"Unmatched paren."}};
             }
             nextChar();
         }
