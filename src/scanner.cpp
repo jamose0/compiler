@@ -282,6 +282,10 @@ Token Scanner::nextToken()
         return getNumber(sp);
     }
 
+    if (character == EOF || character == '\0') {
+        std::cout << "eof\n";
+    }
+
     throw(ScannerException{"Unexpected symbol '" +
             std::string{sp, 1} + "'", m_line_num});
     return Token{TokenType::ERROR, std::string{"err"}};
