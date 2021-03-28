@@ -109,6 +109,10 @@ Token Scanner::nextToken()
     }
     skipWS();
 
+    if (isAtEnd()) {
+        return Token{TokenType::END, "end"};
+    }
+
     char* sp = m_ip;
     // std::cout << character << '\n';
 
