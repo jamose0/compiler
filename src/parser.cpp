@@ -45,6 +45,11 @@ void Parser::statement()
         expect(Token{TokenType::SEMICOLON, ";"});
     } else if (accept(Token{TokenType::IF, "if"})) {
         std::cout << "p -> if\n";
+        advanceToken();
+        //condition()
+        expect(Token{TokenType::L_BRACE, "{"});
+        block();
+        expect(Token{TokenType::R_BRACE, "}"});
     }
 }
 
