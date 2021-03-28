@@ -33,13 +33,18 @@ void Parser::statement()
     if (accept(Token{TokenType::VAR, "var"})) {
         std::cout << "p -> var\n";
         advanceToken();
+        /* Identifier name doesn't matter */
         expect(Token{TokenType::IDENTIFIER, ""});
         advanceToken();
         expect(Token{TokenType::EQ, "="});
         advanceToken();
         std::cout << "expanding to expression!\n";
-        std::exit(0);
+        //std::exit(0);
         //expression();
+        advanceToken();
+        expect(Token{TokenType::SEMICOLON, ";"});
+    } else if (accept(Token{TokenType::IF, "if"})) {
+        std::cout << "p -> if\n";
     }
 }
 
@@ -47,7 +52,7 @@ void Parser::block()
 {
     std::cout << "calling block\n";
     if (m_token.getType() == TokenType::END)
-        return;
+        std::exit(0);
     std::cout << m_token << '\n';
     
     if (accept_stmt())
@@ -56,7 +61,9 @@ void Parser::block()
         statement();
     }
 
-    std::cout << "didn't match\n";
+    advanceToken();
+
+    //std::cout << "didn't match\n";
 
     block();
 }
