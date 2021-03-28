@@ -60,8 +60,7 @@ void Parser::block()
         std::exit(0);
     std::cout << m_token << '\n';
     
-    if (accept_stmt())
-    {
+    if (accept_stmt()) {
         std::cout << "expanding to Statement!\n";
         statement();
     }
