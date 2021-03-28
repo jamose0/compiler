@@ -99,9 +99,9 @@ public:
         : m_type{type}, m_lexeme{lexeme}
     {}
 
-    TokenType getType();
+    TokenType getType() const;
 
-    std::string_view getLexeme();
+    std::string_view getLexeme() const;
 
     Token& operator=(const Token &copy);
 

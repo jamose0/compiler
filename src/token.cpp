@@ -2,12 +2,12 @@
 
 /* Token member functions  */
 
-TokenType Token::getType()
+TokenType Token::getType() const
 {
     return m_type;
 }
 
-std::string_view Token::getLexeme()
+std::string_view Token::getLexeme() const
 {
     return m_lexeme;
 }
