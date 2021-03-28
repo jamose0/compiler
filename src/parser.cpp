@@ -54,6 +54,8 @@ void Parser::condition()
     if (accept(Token{TokenType::BANG, "!"})) {
         advanceToken();
 
+        std::cout << "recursively calling condition\n";
+
         condition();
     } else {
         expression();
