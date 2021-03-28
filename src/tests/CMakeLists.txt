@@ -1,4 +1,4 @@
-find_package(Catch2 REQUIRED)
+find_package(Catch2 CONFIG REQUIRED)
 set(OBJ_DIR ${CMAKE_SOURCE_DIR}/build/src/CMakeFiles/compiler.dir)
 set(OBJS ${OBJ_DIR}/scanner.cpp.o ${OBJ_DIR}/token.cpp.o ${OBJ_DIR}/scannerexception.cpp.o)
 
