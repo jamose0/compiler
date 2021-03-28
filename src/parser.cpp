@@ -10,6 +10,7 @@ void Parser::advanceToken()
 
 bool Parser::accept(const Token& token)
 {
+    std::cout << "comparing " << token << " with " << m_token << " <-m\n";
     return token.getType() == m_token.getType();
 }
 
@@ -21,6 +22,20 @@ void Parser::expect(const Token& token)
     throw ParseError{"fail", 0};
 }
 
+void Parser::expectComparison()
+{
+    std::cout << m_token << "<- expecting\n";
+    if (!(accept(Token{TokenType::EQ_EQ, "=="}) ||
+          accept(Token{TokenType::BANG_EQ, "!="}) ||
+          accept(Token{TokenType::GREATER, ">"}) ||
+          accept(Token{TokenType::LESS, "<"}) ||
+          accept(Token{TokenType::LESS_EQ, "<="}) ||
+          accept(Token{TokenType::GREATER_EQ, ">="})))
+    {
+        throw ParseError{"uh-oh", 0};
+    }       
+}
+
 bool Parser::accept_stmt()
 {
     return (accept(Token{TokenType::VAR, "var"}) ||
@@ -28,9 +43,30 @@ bool Parser::accept_stmt()
             accept(Token{TokenType::WHILE, "while"}));
 }
 
-void Parser::condition()
+void Parser::expression()
 {
     return;
+}
+
+void Parser::condition()
+{
+    std::cout << m_token << '\n';
+    if (accept(Token{TokenType::BANG, "!"})) {
+        advanceToken();
+
+        condition();
+    } else {
+        expression();
+
+        std::cout << m_token << '\n';
+
+        expectComparison();
+
+        advanceToken();
+
+        expression();
+    }
+    //return;
 }
 
 void Parser::statement()
@@ -51,6 +87,7 @@ void Parser::statement()
     } else if (accept(Token{TokenType::IF, "if"})) {
         std::cout << "p -> if\n";
         advanceToken();
+        std::cout << "expanding to condition\n";
         condition();
         expect(Token{TokenType::L_BRACE, "{"});
         block();

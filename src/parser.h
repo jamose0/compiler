@@ -18,7 +18,11 @@ private:
 
     void expect(const Token& token);
 
+    void expectComparison();
+
     bool accept_stmt();
+
+    void expression();
 
     void condition();
 
