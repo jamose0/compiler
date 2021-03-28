@@ -1,6 +1,7 @@
 #include "scanner.h"
 #include "token.h"
 #include "readfile.h"
+#include "parser.h"
 
 #include <iostream>
 #include <exception>
