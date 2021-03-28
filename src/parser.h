@@ -14,6 +14,8 @@ private:
 
     bool accept(const Token& token);
 
+    bool accept_stmt();
+
     void block();
 
 public:
