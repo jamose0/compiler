@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 
         std::cout << "\nend\n";
     }
-    Parser p{"var x = 7;"};
+    Parser p{"if { var x = 7; }"};
     p.parse();
     return 0;
 }

@@ -28,6 +28,11 @@ bool Parser::accept_stmt()
             accept(Token{TokenType::WHILE, "while"}));
 }
 
+void Parser::condition()
+{
+    return;
+}
+
 void Parser::statement()
 {
     if (accept(Token{TokenType::VAR, "var"})) {
@@ -46,7 +51,7 @@ void Parser::statement()
     } else if (accept(Token{TokenType::IF, "if"})) {
         std::cout << "p -> if\n";
         advanceToken();
-        //condition()
+        condition();
         expect(Token{TokenType::L_BRACE, "{"});
         block();
         expect(Token{TokenType::R_BRACE, "}"});

@@ -20,6 +20,8 @@ private:
 
     bool accept_stmt();
 
+    void condition();
+
     void statement();
 
     void block();
