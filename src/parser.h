@@ -12,6 +12,8 @@ private:
     Scanner m_s;
     Token m_token;
 
+    void advanceToken();
+
     bool accept(const Token& token);
 
     void expect(const Token& token);

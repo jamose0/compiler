@@ -3,6 +3,11 @@
 
 #include <cstdlib>
 
+void Parser::advanceToken()
+{
+    m_token = m_s.nextToken();
+}
+
 bool Parser::accept(const Token& token)
 {
     return token.getType() == m_token.getType();
@@ -27,11 +32,11 @@ void Parser::statement()
 {
     if (accept(Token{TokenType::VAR, "var"})) {
         std::cout << "p -> var\n";
-        m_token = m_s.nextToken();
+        advanceToken();
         expect(Token{TokenType::IDENTIFIER, ""});
-        m_token = m_s.nextToken();
+        advanceToken();
         expect(Token{TokenType::EQ, "="});
-        m_token = m_s.nextToken();
+        advanceToken();
         std::cout << "expanding to expression!\n";
         std::exit(0);
         //expression();
