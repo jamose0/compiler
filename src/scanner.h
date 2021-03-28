@@ -57,6 +57,8 @@ public:
     Token nextToken();
 
     bool isAtEnd();
+
+    size_t get_line();
 };
 
 #endif

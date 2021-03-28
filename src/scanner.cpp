@@ -97,6 +97,11 @@ bool Scanner::isAtEnd()
     return (*m_ip == '\0' || *m_ip == EOF);
 }
 
+size_t Scanner::get_line()
+{
+    return m_line_num;
+}
+
 Token Scanner::nextToken()
 {
     char character{};
