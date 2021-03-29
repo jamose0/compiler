@@ -8,6 +8,7 @@ void Parser::advanceToken()
     m_token = m_s.nextToken();
 }
 
+/* TODO: Change the next two functions to take a TokenType as argument */
 bool Parser::accept(const Token& token)
 {
     std::cout << "comparing " << token << " with " << m_token << " <-m\n";
@@ -43,8 +44,70 @@ bool Parser::accept_stmt()
             accept(Token{TokenType::WHILE, "while"}));
 }
 
+void Parser::factor()
+{
+    if (accept(Token{TokenType::IDENTIFIER, ""})) {
+    } else if (accept(Token{TokenType::INTEGER_L, ""})) {
+        std::cout << "matched integer literal\n";
+        advanceToken();
+    } else if (accept(Token{TokenType::L_PAREN, "("})) {
+        advanceToken();
+        std::cout << "calling expression from factor\n";
+        expression();
+        std::cout << "returned to factor\n";
+        //advanceToken();
+        expect(Token{TokenType::R_PAREN, ")"});
+        std::cout << m_token << " <- current tok\n";
+        std::cout << "expect complete\n";
+        advanceToken();
+    } else {
+        throw ParseError{"fail at factor", 0};
+    }
+
+}
+
+void Parser::termP()
+{
+    if (accept(Token{TokenType::STAR, "*"})) {
+        advanceToken();
+        factor();
+        termP();
+    } else if (accept(Token{TokenType::SLASH, "/"})) {
+        advanceToken();
+        factor();
+        termP();
+    } else {
+        return;
+    }
+}
+
+void Parser::term()
+{
+    factor();
+    termP();
+    return;
+}
+
+void Parser::expressionP()
+{
+    if (accept(Token{TokenType::PLUS, "+"})) {
+        advanceToken();
+        term();
+        expressionP();
+    } else if (accept(Token{TokenType::MINUS, "-"})) {
+        advanceToken();
+        term();
+        expressionP();
+    } else {
+        std::cout << "none left\n";
+        return;
+    }
+}
+
 void Parser::expression()
 {
+    term();
+    expressionP();
     return;
 }
 
@@ -58,6 +121,7 @@ void Parser::condition()
 
         condition();
     } else {
+        std::cout << "calling expr from cond\n";
         expression();
 
         std::cout << m_token << '\n';

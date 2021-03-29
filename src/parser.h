@@ -22,6 +22,14 @@ private:
 
     bool accept_stmt();
 
+    void factor();
+
+    void termP();
+
+    void term();
+
+    void expressionP();
+
     void expression();
 
     void condition();
