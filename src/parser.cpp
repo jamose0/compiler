@@ -47,6 +47,8 @@ bool Parser::accept_stmt()
 void Parser::factor()
 {
     if (accept(Token{TokenType::IDENTIFIER, ""})) {
+        std::cout << "matched identifier\n";
+        advanceToken();
     } else if (accept(Token{TokenType::INTEGER_L, ""})) {
         std::cout << "matched integer literal\n";
         advanceToken();
@@ -152,6 +154,14 @@ void Parser::statement()
         expect(Token{TokenType::SEMICOLON, ";"});
     } else if (accept(Token{TokenType::IF, "if"})) {
         std::cout << "p -> if\n";
+        advanceToken();
+        std::cout << "expanding to condition\n";
+        condition();
+        expect(Token{TokenType::L_BRACE, "{"});
+        block();
+        expect(Token{TokenType::R_BRACE, "}"});
+    } else if (accept(Token{TokenType::WHILE, "while"})) {
+        std::cout << "p -> while\n";
         advanceToken();
         std::cout << "expanding to condition\n";
         condition();
