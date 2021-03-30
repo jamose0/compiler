@@ -46,7 +46,12 @@ bool Parser::accept_stmt()
 
 void Parser::factor()
 {
-    if (accept(Token{TokenType::IDENTIFIER, ""})) {
+    if (accept(Token{TokenType::MINUS, "-"})) {
+        std::cout << "at minus\n";
+        advanceToken();
+        std::cout << "recursively calling factor\n";
+        factor();
+    } else if (accept(Token{TokenType::IDENTIFIER, ""})) {
         std::cout << "matched identifier\n";
         advanceToken();
     } else if (accept(Token{TokenType::INTEGER_L, ""})) {
