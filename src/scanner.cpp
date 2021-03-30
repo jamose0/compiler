@@ -171,6 +171,8 @@ Token Scanner::nextToken()
         }
         getIdent(sp);
     }
+    case 'w':
+        return ((checkKW("while")) ? MAKE_TOK(WHILE, sp, 5) : getIdent(sp));
     case 'l':
         return ((checkKW("loop")) ? MAKE_TOK(LOOP, sp, 4) : getIdent(sp));
     case 'v': {
