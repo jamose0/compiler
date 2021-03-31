@@ -1,13 +1,18 @@
 #ifndef ASTNODE_H
 #define ASTNODE_H
 
-/* AST base class */
-class AstNode
-{
-private:
+#include "ast.h"
 
-public:
-    AstNode();
-};
+namespace Ast {
+
+    /* AST base class */
+    class AstNode
+    {
+    public:
+        
+        virtual const NodeType &getType() const noexcept  = 0;
+    };
+    
+}
 
 #endif
