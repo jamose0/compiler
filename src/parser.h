@@ -23,6 +23,20 @@ private:
 
     /* Advances token */
     void advanceToken();
+
+    /* NOTE: The following functions should return the token that follows the
+       last one it uses. Thus, after using one of these functions, there should
+       be no need to call advanceToken() */
+
+    void factor();
+
+    void termP();
+
+    void term();
+    
+    void exprP();
+
+    void expr();
     
 public:
     Parser(std::string_view program)
