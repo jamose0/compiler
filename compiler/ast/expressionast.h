@@ -7,6 +7,12 @@ namespace Ast {
 
     class ExprNode : public AstNode
     {
+    public:
+        ExprNode() = default;
+        ExprNode(NodeType type)
+            : AstNode(type)
+        {
+        }
     };
 
     class UnaryExprNode : public ExprNode
@@ -18,9 +24,11 @@ namespace Ast {
 
     public:
         UnaryExprNode(ExprNode &expr, TokenType op)
-            : m_rhs{&expr}, m_unaryOperator{op}
+            : ExprNode(NodeType::UNARY_EXPR), m_rhs{&expr}, m_unaryOperator{op}
         {
         }
+
+        virtual const NodeType &getType() const noexcept;
     };
 
     class BinaryExprNode : public ExprNode
@@ -33,9 +41,12 @@ namespace Ast {
         
     public:
         BinaryExprNode(ExprNode &lhs, ExprNode &rhs, TokenType op)
-            : m_lhs{&lhs}, m_rhs{&rhs}, m_binaryOperator{op}
+            : ExprNode(NodeType::BINARY_EXPR), m_lhs{&lhs}, m_rhs{&rhs},
+              m_binaryOperator{op}
         {
         }
+
+        virtual const NodeType &getType() const noexcept;
     };
 
 }

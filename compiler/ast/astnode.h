@@ -8,9 +8,15 @@ namespace Ast {
     /* AST base class */
     class AstNode
     {
-    public:
+    protected:
+        NodeType m_type;
         
-        virtual const NodeType &getType() const noexcept  = 0;
+    public:
+        AstNode(NodeType type) : m_type{type}
+        {
+        }
+        
+        virtual const NodeType &getType() const noexcept = 0;
     };
     
 }
