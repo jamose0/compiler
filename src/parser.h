@@ -20,6 +20,9 @@ private:
     /* This function calls accept and passes tType as an argument. If accept
        returns false, it will throw a ParseError */
     void expect(TokenType tType) const;
+
+    /* Advances token */
+    void advanceToken();
     
 public:
     Parser(std::string_view program)

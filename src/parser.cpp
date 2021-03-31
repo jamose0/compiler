@@ -19,12 +19,19 @@ void Parser::expect(TokenType tType) const
     }
 }
 
+void Parser::advanceToken()
+{
+    m_token = m_scanner.nextToken();
+}
+
 void Parser::parse()
 {
-    if (accept(TokenType::WHILE)) {
-        std::cout << "accept while\n";
-    }
+    //if (accept(TokenType::WHILE)) {
+    //std::cout << "accept while\n";
+    //}
 
-    expect(TokenType::IF);
+    //expect(TokenType::IF);
+    advanceToken();
+    expect(TokenType::IDENTIFIER);
     std::cout << "Parsing!\n";
 }
