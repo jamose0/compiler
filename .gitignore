@@ -7,5 +7,5 @@ build/
 *.swp
 
 #old parser
-src/parser-old.cpp
-src/parser-old.h
+compiler/parser/parser-old.cpp
+compiler/parser/parser-old.h
