@@ -1,13 +1,22 @@
 #ifndef AST_H
 #define AST_H
 
-namespace Ast {
+#include "asttype.h"
+#include "expressionast.h"
+#include "astnode.h"
 
-    enum class NodeType
+
+namespace Ast {
+    class Ast
     {
-        BINARY_EXPR,
-        UNARY_EXPR,
-            
+    private:
+        AstNode* m_root;
+        
+    public:
+        Ast(AstNode& root)
+            : m_root{&root}
+        {
+        }
     };
 }
 

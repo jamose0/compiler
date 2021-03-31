@@ -1,7 +1,8 @@
 #ifndef ASTNODE_H
 #define ASTNODE_H
 
-#include "ast.h"
+#include "asttype.h"
+//#include "expressionast.h"
 
 namespace Ast {
 
@@ -15,6 +16,8 @@ namespace Ast {
         AstNode(NodeType type) : m_type{type}
         {
         }
+
+        virtual ~AstNode() {}
         
         virtual const NodeType &getType() const noexcept = 0;
     };

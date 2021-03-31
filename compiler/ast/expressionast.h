@@ -1,5 +1,9 @@
+#ifndef EXPRESSIONAST_H
+#define EXPRESSIONAST_H
+
 #include "astnode.h"
 #include "token.h"
+#include "asttype.h"
 
 namespace Ast {
 
@@ -8,7 +12,7 @@ namespace Ast {
     class ExprNode : public AstNode
     {
     public:
-        ExprNode() = default;
+        //ExprNode() = default;
         ExprNode(NodeType type)
             : AstNode(type)
         {
@@ -50,3 +54,5 @@ namespace Ast {
     };
 
 }
+
+#endif
