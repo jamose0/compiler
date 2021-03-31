@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 
         std::cout << "\nend\n";
     }
-    Parser p{"3+1"};
+    Parser p{"3+1* (3 + 2)"};
     try {
         p.parse();
     } catch (const ParseError &err) {

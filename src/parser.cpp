@@ -31,6 +31,7 @@ void Parser::factor()
         advanceToken();
         factor();
     } else if (accept(TokenType::L_PAREN)) {
+        advanceToken();
         expr();
         expect(TokenType::R_PAREN);
         advanceToken();
