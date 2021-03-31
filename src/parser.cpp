@@ -144,6 +144,7 @@ void Parser::condition()
 
 void Parser::statement()
 {
+    //throw "hi";
     if (accept(Token{TokenType::VAR, "var"})) {
         std::cout << "p -> var\n";
         advanceToken();
@@ -154,8 +155,9 @@ void Parser::statement()
         advanceToken();
         std::cout << "expanding to expression!\n";
         //std::exit(0);
-        //expression();
-        advanceToken();
+        expression();
+        std::cout << "return from expression\n";
+        //advanceToken();
         expect(Token{TokenType::SEMICOLON, ";"});
     } else if (accept(Token{TokenType::IF, "if"})) {
         std::cout << "p -> if\n";
@@ -163,32 +165,54 @@ void Parser::statement()
         std::cout << "expanding to condition\n";
         condition();
         expect(Token{TokenType::L_BRACE, "{"});
+        advanceToken();
         block();
+        std::cout << "return from block!\n";
         expect(Token{TokenType::R_BRACE, "}"});
+        //advanceToken();
     } else if (accept(Token{TokenType::WHILE, "while"})) {
         std::cout << "p -> while\n";
         advanceToken();
         std::cout << "expanding to condition\n";
         condition();
         expect(Token{TokenType::L_BRACE, "{"});
+        advanceToken();
         block();
+        std::cout << "return from block!\n";
         expect(Token{TokenType::R_BRACE, "}"});
+        //advanceToken();
+    } else {
+        std::cout << "THROWING\n";
+        throw ParseError{std::string{"Unexpected symbol: "}
+            + std::string{m_token.getLexeme()}, 0};
     }
+    //std::cout << "what?????\n";
 }
 
 void Parser::block()
 {
+    /* make block return on '}' */
     std::cout << "calling block\n";
     if (m_token.getType() == TokenType::END)
-        std::exit(0);
+        return;
     std::cout << m_token << '\n';
     
     if (accept_stmt()) {
         std::cout << "expanding to Statement!\n";
         statement();
+    } else {
+        throw ParseError{std::string{"Unexpected symbol: "}
+            + std::string{m_token.getLexeme()}, 0};
     }
 
     advanceToken();
+
+    std::cout << "token at block <- " << m_token << '\n';
+
+    if (m_token.getType() == TokenType::R_BRACE)
+        return;
+
+    //advanceToken();
 
     //std::cout << "didn't match\n";
 

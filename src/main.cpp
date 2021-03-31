@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 
         std::cout << "\nend\n";
     }
-    Parser p{"while x == --10 {\n  if x == y {\n return x;\n  x = x + 1;\n}\n}"};
+    Parser p{"while x == --10 {\n  if x == y {\n var x = 7 + 4;}}"};
     p.parse();
     return 0;
 }
