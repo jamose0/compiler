@@ -97,7 +97,7 @@ bool Scanner::isAtEnd()
     return (*m_ip == '\0' || *m_ip == EOF);
 }
 
-size_t Scanner::get_line()
+size_t Scanner::getLine() const
 {
     return m_line_num;
 }

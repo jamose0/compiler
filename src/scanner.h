@@ -58,7 +58,7 @@ public:
 
     bool isAtEnd();
 
-    size_t get_line();
+    size_t getLine() const;
 };
 
 #endif

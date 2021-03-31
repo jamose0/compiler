@@ -2,6 +2,7 @@
 #include "token.h"
 #include "readfile.h"
 #include "parser.h"
+#include "parseerror.h"
 
 #include <iostream>
 #include <exception>
@@ -25,6 +26,12 @@ int main(int argc, char* argv[])
         std::cout << "\nend\n";
     }
     Parser p{"while x == --10 {\n  if x == y {\n var x = 7 + 4;}}"};
-    p.parse();
+    try {
+        p.parse();
+    } catch (const ParseError &err) {
+        std::cerr << err.what();
+        std::cerr << "Compilation failed: Exiting...\n";
+        std::exit(1);
+    }
     return 0;
 }
