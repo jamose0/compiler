@@ -3,6 +3,8 @@
 
 namespace Ast {
 
+    /* Watch out for weird lifetime errors */
+
     class ExprNode : public AstNode
     {
     };
@@ -15,7 +17,8 @@ namespace Ast {
         TokenType m_unaryOperator;
 
     public:
-        UnaryExprNode(TokenType op) : m_unaryOperator{op}
+        UnaryExprNode(ExprNode &expr, TokenType op)
+            : m_rhs{&expr}, m_unaryOperator{op}
         {
         }
     };
@@ -29,8 +32,8 @@ namespace Ast {
         TokenType m_binaryOperator;
         
     public:
-        BinaryExprNode(TokenType op)
-            : m_binaryOperator{op}
+        BinaryExprNode(ExprNode &lhs, ExprNode &rhs, TokenType op)
+            : m_lhs{&lhs}, m_rhs{&rhs}, m_binaryOperator{op}
         {
         }
     };
