@@ -51,6 +51,7 @@ void Parser::factor()
 
 void Parser::termP()
 {
+    std::cout << "call termP\n";
     if (accept(TokenType::STAR)) {
         advanceToken();
         factor();
@@ -64,14 +65,18 @@ void Parser::termP()
 
 void Parser::term()
 {
+    std::cout << "call term\n";
     factor();
+    std::cout << "return from factor\n";
     termP();
+    std::cout << "return from termP\n";
 }
 
 void Parser::exprP()
 {
     /* These two branches look the same now, but they will be different when
        we build the AST */
+    std::cout << "call exprP\n";
     if (accept(TokenType::PLUS)) {
         advanceToken();
         term();
@@ -86,8 +91,11 @@ void Parser::exprP()
 
 void Parser::expr()
 {
+    std::cout << "call expr\n";
     term();
+    std::cout << "return from term\n";
     exprP();
+    std::cout << "return from exprP\n";
 }
 
 void Parser::parse()
