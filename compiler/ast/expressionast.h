@@ -3,20 +3,33 @@
 
 namespace Ast {
 
-    class ExprAst : public AstNode
+    class ExprNode : public AstNode
     {
     };
 
-    class BinaryExprAst : public ExprAst
+    class UnaryExprNode : public ExprNode
     {
     private:
-        ExprAst* m_lhs;
-        ExprAst* m_rhs;
+        ExprNode* m_rhs;
+
+        TokenType m_unaryOperator;
+
+    public:
+        UnaryExprNode(TokenType op) : m_unaryOperator{op}
+        {
+        }
+    };
+
+    class BinaryExprNode : public ExprNode
+    {
+    private:
+        ExprNode* m_lhs;
+        ExprNode* m_rhs;
 
         TokenType m_binaryOperator;
         
     public:
-        BinaryExprAst(TokenType op)
+        BinaryExprNode(TokenType op)
             : m_binaryOperator{op}
         {
         }
